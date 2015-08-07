@@ -4,6 +4,9 @@ echo '<!DOCTYPE html>
 <html>
 <head>
 	<title>Inventario</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
 </head>
 <body>
 ';
@@ -15,7 +18,6 @@ $items = new Items();
 
 // get all items on the database
 $myItems= $items->all();
-echo '<hr><pre>'; print_r($myItems); echo '</pre><hr>';
 
 // print the table
 echo '<table class="table">
@@ -31,6 +33,7 @@ echo '<table class="table">
 		<tbody>
 
 ';
+
 foreach ($myItems as $key => $item) {
 	echo '<tr id="'.$item['id'].'">
 			<td>
@@ -80,11 +83,3 @@ echo '</tbody>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
