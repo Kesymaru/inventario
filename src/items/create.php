@@ -1,7 +1,7 @@
 <?php
 
 // load the items class 
-require_once('../ItemsClass.php');
+require_once('../src/classes/ItemsClass.php');
 
 $response = array(
 	'error' => true,

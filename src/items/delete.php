@@ -1,8 +1,9 @@
 <?php
 
 // load the items class 
-require_once('../ItemsClass.php');
+require_once('../classes/ItemsClass.php');
 
+// response
 $response = array(
 	'error' => true,
 	'message' => '',
@@ -21,4 +22,6 @@ if(isset($_GET['id'])){
 }else{
 	$response['message'] = 'Undefined item id';
 }
+
+// json response
 echo json_encode($response);

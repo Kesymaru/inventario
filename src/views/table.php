@@ -1,17 +1,11 @@
 <?php
 
-echo '<!DOCTYPE html>
-<html>
-<head>
-	<title>Inventario</title>
+/**
+ * @name table.php
+ * @description prints all the inventary items inside a table
+ */
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-</head>
-<body>
-';
-
-require_once('ItemsClass.php');
+require_once('src/classes/ItemsClass.php');
 
 // instace of the items
 $items = new Items();
@@ -40,18 +34,18 @@ foreach ($myItems as $key => $item) {
 				'.$item['id'].'
 			</td>
 			<td>
-				<input 
-				id="name-'.$item['id'].'" 
+				<input
+				id="name-'.$item['id'].'"
 				value="'.$item['name'].'"
 				onchange="app.update(\''.$item['id'].'\')"
 				>
 			</td>
 			<td>'
-				.$item['created'].
-			'</td>
+		.$item['created'].
+		'</td>
 			<td>'
-				.$item['updated'].
-			'</td>
+		.$item['updated'].
+		'</td>
 			<td>
 				<button onclick="app.delete(\''.$item['id'].'\')">
 					Delete
@@ -76,10 +70,3 @@ echo '</tbody>
 		</tr>
 	</tfoot>
 </table>';
-
-?>
-
-	<script type="text/javascript" src="main.js"></script>
-
-</body>
-</html>
