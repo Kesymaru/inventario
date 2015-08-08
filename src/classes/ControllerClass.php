@@ -51,7 +51,7 @@ class Controller{
 							$this->request[$param[0]] = $param[1];
 						}
 					}
-				}ß
+				}
 			}
 
 			echo print_r($this->request);
