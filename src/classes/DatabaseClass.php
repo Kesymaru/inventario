@@ -5,11 +5,11 @@
 */
 class Database{	
 	// private variables
-	private $username = 	'pacho';
-	private $password = 	'pancho';
-	private $host = 		'localhost';
-	private $database = 	'inventario';
-	protected $connection =  NULL;
+	private 	$username = 	'pacho';
+	private 	$password = 	'pancho';
+	private 	$host = 		'localhost';
+	private 	$database = 	'inventario';
+	protected 	$connection =	NULL;
 
 	/**
 	* Connect to the database

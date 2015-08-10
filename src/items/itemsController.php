@@ -14,7 +14,10 @@ class ItemsController extends Controller{
 		// call the parent contruct
 		parent::__construct($paths, $method, $request);
 
+		// determinates the action based on the method
 		switch($this->method){
+
+			// GET ACTION "GET"
 			case 'GET':
 				// id is defined
 				if(isset($this->request['id'])){
@@ -24,22 +27,30 @@ class ItemsController extends Controller{
 				}
 				break;
 
+			// POST ACTION "CREATE"
 			case 'POST':
-				if(isset($request['name'])){
-					$this->create($request['name']);
+				if(isset($this->request['name'])){
+					$this->create($this->request['name']);
 				}
 				break;
 
+			// PUT ACTION "UPDATE"
 			case 'PUT':
-				if(isset($request['id']) && isset($request['name'])){
-					$this->update($request['id'], $request['name']);
+				if(isset($this->request['id']) && isset($this->request['name'])){
+					$this->update($this->request['id'], $this->request['name']);
 				}
 				break;
 
+			//DELETE ACTION "REMOVE"
 			case 'DELETE':
+				if( isset($this->request['id']) ){
+					$this->delete($this->request['id']);
+				}
 				break;
 
 			default:
+				// error response by default
+				$this->response('', 'Error', true);
 				return false;
 		}
 	}
@@ -113,6 +124,22 @@ class ItemsController extends Controller{
 		return $this->response('', "Could not update the item $id", true);
 	}
 
+	/**
+	 * @name delete
+	 * @description  delete an item
+	 * @param int $id
+	 * @return mixed
+	 */
+	private function delete($id){
+
+		$item = new Items();
+
+		if($item->delete($id)){
+			return $this->response('', 'Item has been deleted', false);
+		}
+
+		return $this->response('', "Could not delete the item $id", true);
+	}
 }
 
 

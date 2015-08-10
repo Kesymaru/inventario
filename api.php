@@ -1,5 +1,6 @@
 <?php
 
+/*
 // get the HTTP METHOD
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -7,27 +8,96 @@ $method = $_SERVER['REQUEST_METHOD'];
 $request = $_REQUEST;
 
 // explode the url path
-$uri = substr($_SERVER['REQUEST_URI'], 1);
+$url = substr($_SERVER['REQUEST_URI'], 1);
+
+// remove the 'inventario/api.php'
+$url = preg_replace('/inventario\/api.php\//', '', $url);
+
+// replace the "?" query param to "/"
+$url = preg_replace('/\?/', '/', $url);
 
 // get all paths
-$paths = explode("/", $uri);
+$paths = explode('/', $url);
 
-if(isset($paths[2])){
-
-	// remove "?"
-	$paths[2] = str_replace('?', '', $paths[2]);
-
-	echo print_r($paths);
-	echo print_r($request);
+if( isset($paths[0]) ){
 
 	// RestFul endpoint
-	switch($paths[2]){
+	switch($paths[0]){
 		case 'items':
 
 			require_once('src/items/itemsController.php');
 
 			$controller = new ItemsController($paths, $method, $request);
 			break;
+
+		case 'categories':
+
+			break;
+	}
+}
+*/
+
+/**
+ * Class API
+ */
+class API {
+
+	private $method;
+	private $url;
+	private $request;
+	private $paths;
+
+	function __construct(){
+
+		// get the HTTP METHOD
+		$this->method = $_SERVER['REQUEST_METHOD'];
+
+		// get the HTTP REQUEST DATA
+		$this->request = $_REQUEST;
+
+		// explode the url path
+		$this->url = substr($_SERVER['REQUEST_URI'], 1);
+
+		// remove the 'inventario/api.php'
+		$this->url = preg_replace('/inventario\/api.php\//', '', $this->url);
+
+		// replace the "?" query param to "/"
+		$this->url = preg_replace('/\?/', '/', $this->url);
+
+		// get all paths
+		$this->paths = explode('/', $this->url);
+
+		echo "\n\tPATHS\n";
+		print_r($this->paths);
+
+		// action to run
+		$this->actions();
+	}
+
+	/**
+	 * @name actions
+	 * @description determinate the action to run, base on the mthod and url
+	 */
+	private function actions(){
+
+		echo 'PATHS';
+		print_r($this->paths);
+
+		// RestFul endpoint
+		switch( $this->paths[0] ){
+			case 'items':
+
+				require_once('src/items/itemsController.php');
+
+				$controller = new ItemsController($this->paths, $this->method, $this->request);
+				break;
+
+			case 'categories':
+
+				break;
+		}
+
 	}
 }
 
+$api = new API();

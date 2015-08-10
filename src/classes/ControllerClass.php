@@ -16,28 +16,33 @@ class Controller{
 		$this->method = $method;
 		$this->request = $request;
 
+		// decode the url data
 		$this->urldecode();
 	}
 
+	/**
+	 * @name urldecode
+	 * @description decode the url query params
+	 */
 	private function urldecode(){
 
-		if(isset($this->paths[3])){
+		// id data
+		if( isset($this->paths[1]) ){
+			$this->request['id'] = $this->paths[1];
+		}
+
+		if( isset($this->paths[2]) ){
 
 			$matches = array();
 
 			// url
-			$url = $this->paths[3];
+			$url = $this->paths[2];
 
 			preg_match('/\?.*$/', $url, $matches);
 
 			if(sizeof($matches)){
 
-				// remove the "?"
-				$url = substr($matches[0], 1);
-
-				echo 'URL '; echo $url;
-
-				if(!empty($url)){
+				if( !empty($url) ){
 
 					$url = urldecode($url);
 
@@ -54,7 +59,8 @@ class Controller{
 				}
 			}
 
-			echo print_r($this->request);
+			//echo 'REQUEST';
+			//echo print_r($this->request);
 		}
 
 	}
@@ -67,11 +73,12 @@ class Controller{
 	 * @param bool|false $error
 	 */
 	protected function response($data, $message, $error = false){
+
 		// json response
 		$response = array(
-			'data' => $data,
-			'message' => $message,
-			'error' => $error,
+			'data' 		=> $data,
+			'message' 	=> $message,
+			'error' 	=> $error,
 		);
 
 		// print the json response
