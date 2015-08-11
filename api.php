@@ -67,9 +67,6 @@ class API {
 		// get all paths
 		$this->paths = explode('/', $this->url);
 
-		echo "\n\tPATHS\n";
-		print_r($this->paths);
-
 		// action to run
 		$this->actions();
 	}
@@ -80,13 +77,9 @@ class API {
 	 */
 	private function actions(){
 
-		echo 'PATHS';
-		print_r($this->paths);
-
 		// RestFul endpoint
 		switch( $this->paths[0] ){
 			case 'items':
-
 				require_once('src/items/itemsController.php');
 
 				$controller = new ItemsController($this->paths, $this->method, $this->request);

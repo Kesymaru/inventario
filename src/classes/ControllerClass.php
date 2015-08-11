@@ -58,9 +58,6 @@ class Controller{
 					}
 				}
 			}
-
-			//echo 'REQUEST';
-			//echo print_r($this->request);
 		}
 
 	}

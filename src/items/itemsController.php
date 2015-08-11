@@ -20,7 +20,7 @@ class ItemsController extends Controller{
 			// GET ACTION "GET"
 			case 'GET':
 				// id is defined
-				if(isset($this->request['id'])){
+				if( isset($this->request['id']) ){
 					$this->get($this->request['id']);
 				}else{
 					$this->all();
